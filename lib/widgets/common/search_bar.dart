@@ -21,7 +21,7 @@ class ReusableSearchBar extends StatelessWidget {
             color: Colors.black54,
           ),
           filled: true,
-          fillColor: AppColor.black05,
+          fillColor: AppColor.black05.withOpacity(0.1),
           suffixIcon: Icon(
             Icons.search,
             color: Colors.black54,
@@ -34,7 +34,7 @@ class ReusableSearchBar extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.black45),
+            borderSide: const BorderSide(color: AppColor.black05),
           ),
         ),
         style: const TextStyle(color: Colors.black),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kubramarket_user/core/utils/navigation_service.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/images.dart';
+import '../auth/login_page.dart'; // update path if needed
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,10 +13,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 3), () {
+      NavigationService.pushReplacement(context, LoginPage());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: AppColor.white),
+        color: AppColor.white,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 200.h,
                 child: Image.asset(AppAsset.logo),
               ),
-              ],
+            ],
           ),
         ),
       ),

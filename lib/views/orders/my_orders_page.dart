@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kubramarket_user/core/data/dummyorder_data.dart';
+import 'package:kubramarket_user/core/utils/navigation_service.dart';
+import 'package:kubramarket_user/views/orders/order_detail_page.dart';
 import 'package:kubramarket_user/widgets/common/appbar_widget.dart';
 import '../../widgets/cards/order_card.dart';
 import '../../widgets/common/header_widget.dart';
@@ -21,19 +24,28 @@ class OrderPage extends StatelessWidget {
               SizedBox(height: 10.h),
 
               ListView.builder(
-                itemCount: 3,
+                itemCount: dummyOrders.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  // final product = products[index];
-                  return OrderCard(
-  shopName: "Thaibah Enterprises",
-  orderDate: "03 May 2025",
-  totalAmount: 300,
-  status: "Delivered",
-  statusColor: Color(0xFF7877CE),
-);
-
+                  final order = dummyOrders[index];
+                  return GestureDetector(
+                    onTap: (){
+                      NavigationService.push(context, OrderDetailPage(shopName: order['shopName'], status: order['status'],));
+                    },
+                    child: OrderCard(
+                      shopName: order['shopName'],
+                      orderDate: order['orderDate'],
+                      totalAmount: order['totalAmount'],
+                      status: order['status'],
+                      statusColor:
+                          order['status'] == "Delivered"
+                              ? Color(0xFF7877CE)
+                              : order['status'] == "Cancelled"
+                              ? Colors.red
+                              : Color(0xFFFE887D),
+                    ),
+                  );
                 },
               ),
             ],

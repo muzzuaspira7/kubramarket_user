@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kubramarket_user/core/constants/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kubramarket_user/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
-
 import 'providers/bottomnav_provider.dart';
-import 'views/navigation/bottom_nav.dart';
+import 'providers/shopcategory_provider.dart';
+import 'views/splash/splash_screen.dart';
 
 
 void main() {
@@ -12,6 +13,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
+         ChangeNotifierProvider(create: (_) => ShopCategoryProvider()),
+         ChangeNotifierProvider(create: (_) => AuthProvider()),
+
       ],
       child: const MyApp(),
     ),
@@ -31,7 +35,8 @@ class MyApp extends StatelessWidget {
         ),
           debugShowCheckedModeBanner: false,
           title: 'Kubra Market',
-          home: BottomNavScreen(),
+          // home: BottomNavScreen(),
+          home: SplashScreen(),
           ),
       designSize: const Size(412, 917),
       minTextAdapt: true,

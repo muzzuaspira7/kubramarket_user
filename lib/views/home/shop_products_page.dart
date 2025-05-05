@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kubramarket_user/core/utils/navigation_service.dart';
 import 'package:kubramarket_user/widgets/common/appbar_widget.dart';
 import 'package:kubramarket_user/widgets/common/shopname_and_address_widget.dart';
 import '../../core/data/products_data.dart';
 import '../../widgets/cards/product_card.dart';
+import '../cart/cart_page.dart';
 class ShopProductsPage extends StatelessWidget {
   final String shopName;
   final String shopAddress;
@@ -49,6 +51,10 @@ class ShopProductsPage extends StatelessWidget {
                       description: product['description'],
                       price: product['price'].toDouble(),
                       onTap: () {
+                        NavigationService.push(context, CartPage(
+                          addingCart: true,
+                 
+                        ));
                       },
                     );
                   },

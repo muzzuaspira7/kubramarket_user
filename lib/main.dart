@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kubramarket_user/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'providers/bottomnav_provider.dart';
+import 'providers/cart_provider.dart';
 import 'providers/shopcategory_provider.dart';
 import 'views/splash/splash_screen.dart';
 
@@ -15,6 +16,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
          ChangeNotifierProvider(create: (_) => ShopCategoryProvider()),
          ChangeNotifierProvider(create: (_) => AuthProvider()),
+         ChangeNotifierProvider(create: (_) => CartProvider()),
 
       ],
       child: const MyApp(),

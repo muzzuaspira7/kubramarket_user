@@ -77,20 +77,25 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 30.h),
                     if(!authProvider.isLoginPage)
                     CustomTextField(
+                      
+                      readOnly: false,
                       label: "Name",
                       controller: TextEditingController(),
                     ),
                     if(!authProvider.isLoginPage)
                     CustomTextField(
+                      readOnly: false,
                       label: "Phone",
                       controller: TextEditingController(),
                     ),
                     CustomTextField(
+                      readOnly: false,
                       label: "E-mail",
                       controller: TextEditingController(),
                     ),
                  
                     CustomTextField(
+                      readOnly: false,
                       label: "Password",
                       controller: TextEditingController(),
                     ),

@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kubramarket_user/widgets/common/apptext_widget.dart';
 import 'package:kubramarket_user/core/constants/colors.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/cart_provider.dart';
 
 class CartCard extends StatelessWidget {
+    final int index;
   final String imageUrl;
   final String title;
   final String description;
@@ -12,6 +16,7 @@ class CartCard extends StatelessWidget {
 
   const CartCard({
     super.key,
+    required this.index,
     required this.imageUrl,
     required this.title,
     required this.description,
@@ -21,6 +26,8 @@ class CartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final cartProvider = Provider.of<CartProvider>(context);
+    final quantity = cartProvider.getQuantity(index);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 0),
       child: Card(
@@ -97,17 +104,22 @@ class CartCard extends StatelessWidget {
                             children: [
                               // Minus Button
                               Expanded(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      right: BorderSide(color: AppColor.black40),
+                                child: GestureDetector(
+                                   onTap: () {
+                                  cartProvider.decrement(index);
+                                },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        right: BorderSide(color: AppColor.black40),
+                                      ),
                                     ),
-                                  ),
-                                  child: Icon(
-                                    Icons.remove,
-                                    size: 20.sp,
-                                    color: AppColor.black40,
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 20.sp,
+                                      color: AppColor.black40,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -116,7 +128,7 @@ class CartCard extends StatelessWidget {
                                 child: Container(
                                   alignment: Alignment.center,
                                   child: AppText(
-                                    text: "2",
+                                    text: quantity.toString(),
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -124,19 +136,25 @@ class CartCard extends StatelessWidget {
                               ),
                               // Plus Button
                               Expanded(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      left: BorderSide(
-                                        color: Colors.grey.shade400,
+                                child: GestureDetector(
+
+                                    onTap: () {
+                                  cartProvider.increment(index);
+                                },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        left: BorderSide(
+                                          color: Colors.grey.shade400,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 20.sp,
-                                    color: AppColor.black40,
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 20.sp,
+                                      color: AppColor.black40,
+                                    ),
                                   ),
                                 ),
                               ),

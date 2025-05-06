@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kubramarket_user/core/constants/colors.dart';
 import 'package:kubramarket_user/widgets/common/apptext_widget.dart';
-
 class NormalButton extends StatelessWidget {
   final String text;
   final Color color;
@@ -11,6 +10,7 @@ class NormalButton extends StatelessWidget {
   final double width;
   final double height;
   final double radius;
+  final bool isOutlineButton;
 
   const NormalButton({
     super.key,
@@ -20,23 +20,34 @@ class NormalButton extends StatelessWidget {
     required this.onPressed,
     this.height = 45,
     this.width = 150,
-    this.radius = 5
+    this.radius = 5,
+    this.isOutlineButton = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bgColor = isOutlineButton ? Colors.white : color;
+    final textColor = isOutlineButton ? color : AppColor.white;
+
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.zero,
-        backgroundColor: color,
+        backgroundColor: 
+        
+        bgColor,
+        minimumSize: Size(width.w, height.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius.r), // Rounded corners
+          borderRadius: BorderRadius.circular(radius.r),
+          side: isOutlineButton
+              ? BorderSide(color: color, width: 1)
+              : BorderSide.none,
         ),
-        minimumSize: Size(width.w, height.h), 
       ),
-     
-      child: AppText(text: text, fontSize: fontSize.sp, color: AppColor.white,),
+      child: AppText(
+        text: text,
+        fontSize: fontSize.sp,
+        color: textColor,
+      ),
     );
   }
 }
